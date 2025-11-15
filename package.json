@@ -9,7 +9,9 @@
     "lint": "next lint .",
     "db:migrate": "tsx scripts/apply-migrations.ts",
     "check:deprecated": "node scripts/check-deprecated.cjs",
-    "postinstall": "npm run check:deprecated"
+    "postinstall": "npm run check:deprecated",
+    "push:all": "git push origin main && git push vercel main",
+    "deploy": "git push vercel main"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",

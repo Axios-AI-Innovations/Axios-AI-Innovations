@@ -80,11 +80,17 @@ Both routes are serverless-safe and emit structured JSON errors for the front en
 | `npm run lint` | Run `next lint` |
 | `npm run db:migrate` | Apply SQL migrations to the configured Postgres |
 | `npm run check:deprecated` | Fails when direct dependencies are deprecated |
+| `npm run deploy` | Push to Vercel repository (triggers deployment) |
+| `npm run push:all` | Push to both main and Vercel repositories |
 
 ## Deployment Notes
 
 - Default deployment target is **Vercel**. Environment variables should be added to the Vercel project (remember to mark Stripe keys as encrypted secrets).
 - If you need background jobs/webhooks (e.g., Stripe fulfillment), add another route under `app/api/*`.
+- **Git Remotes**: This project uses two GitHub repositories:
+  - `origin` → Main repository (`Axios-AI-Innovations/Axios-AI-Innovations`)
+  - `vercel` → Vercel deployment repository (`Axios-AI-Innovations/axios_ai_innovations`)
+- **Deployment Workflow**: After committing changes, use `npm run deploy` to push to Vercel, or `npm run push:all` to sync both repositories.
 
 ## Contact
 
