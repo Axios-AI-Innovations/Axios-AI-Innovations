@@ -1,0 +1,155 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --chrome-light: #e8f4f8;
+  --chrome-mid: #8b9da8;
+  --chrome-dark: #3d4c54;
+  --cyan-glow: #00ffff;
+  --magenta-glow: #ff00ff;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #000000;
+  overflow-x: hidden;
+}
+
+/* Chrome metallic text utility */
+.chrome-text {
+  background: linear-gradient(135deg, 
+    #c0d5dd 0%,
+    #e8f4f8 15%,
+    #ffffff 30%,
+    #e8f4f8 45%,
+    #00ffff 60%,
+    #e8f4f8 75%,
+    #ffffff 90%,
+    #c0d5dd 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.3));
+}
+
+/* Chrome surface utility */
+.chrome-surface {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(0, 255, 255, 0.03) 50%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  box-shadow: 
+    0 0 60px rgba(0, 255, 255, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 40px rgba(255, 255, 255, 0.02),
+    inset 0 -2px 30px rgba(0, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+}
+
+/* Chrome button */
+.chrome-button {
+  background: linear-gradient(135deg, 
+    var(--chrome-light), 
+    var(--cyan-glow), 
+    #ffffff, 
+    var(--cyan-glow), 
+    var(--chrome-light)
+  );
+  background-size: 200% 100%;
+  color: #000;
+  font-weight: 700;
+  box-shadow: 
+    0 0 40px rgba(0, 255, 255, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  animation: chromeShift 3s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
+
+.chrome-button:hover {
+  transform: scale(1.05);
+  box-shadow: 
+    0 0 60px rgba(0, 255, 255, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+}
+
+@keyframes chromeShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Chrome glow animation */
+@keyframes chromeGlow {
+  0%, 100% { 
+    box-shadow: 
+      0 0 40px rgba(0, 255, 255, 0.3),
+      inset 0 0 20px rgba(0, 255, 255, 0.1);
+  }
+  50% { 
+    box-shadow: 
+      0 0 60px rgba(0, 255, 255, 0.5),
+      inset 0 0 30px rgba(0, 255, 255, 0.2);
+  }
+}
+
+/* Chrome input fields */
+.chrome-input {
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  color: white;
+  box-shadow: 
+    0 0 20px rgba(0, 255, 255, 0.1),
+    inset 0 2px 4px rgba(0, 0, 0, 0.5),
+    inset 0 0 10px rgba(0, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.chrome-input:focus {
+  border-color: rgba(0, 255, 255, 0.6);
+  box-shadow: 
+    0 0 30px rgba(0, 255, 255, 0.3),
+    inset 0 2px 4px rgba(0, 0, 0, 0.5),
+    inset 0 0 20px rgba(0, 255, 255, 0.1);
+  outline: none;
+}
+
+/* Metallic grid overlay */
+.chrome-grid {
+  background-image: 
+    linear-gradient(rgba(0, 255, 255, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.15) 1px, transparent 1px);
+  background-size: 50px 50px;
+  mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);
+}
+
+/* Chrome edge highlight */
+.chrome-edge {
+  position: relative;
+}
+
+.chrome-edge::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.4) 0%, 
+    transparent 30%, 
+    transparent 70%, 
+    rgba(0, 255, 255, 0.4) 100%
+  );
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
