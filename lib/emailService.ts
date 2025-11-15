@@ -41,10 +41,10 @@ const emailConfig: EmailConfig = {
 const validateEmailConfig = () => {
   const missingVars: string[] = [];
 
-  if (!emailConfig.serviceId) missingVars.push('VITE_EMAILJS_SERVICE_ID');
-  if (!emailConfig.templates.contact) missingVars.push('VITE_EMAILJS_CONTACT_TEMPLATE_ID');
-  if (!emailConfig.templates.customProject) missingVars.push('VITE_EMAILJS_CUSTOM_PROJECT_TEMPLATE_ID');
-  if (!emailConfig.publicKey) missingVars.push('VITE_EMAILJS_PUBLIC_KEY');
+  if (!emailConfig.serviceId) missingVars.push('NEXT_PUBLIC_EMAILJS_SERVICE_ID');
+  if (!emailConfig.templates.contact) missingVars.push('NEXT_PUBLIC_EMAILJS_CONTACT_TEMPLATE_ID');
+  if (!emailConfig.templates.customProject) missingVars.push('NEXT_PUBLIC_EMAILJS_CUSTOM_PROJECT_TEMPLATE_ID');
+  if (!emailConfig.publicKey) missingVars.push('NEXT_PUBLIC_EMAILJS_PUBLIC_KEY');
 
   if (missingVars.length > 0) {
     throw new Error(`Missing required EmailJS environment variables: ${missingVars.join(', ')}`);
@@ -77,8 +77,8 @@ export const sendContactForm = async (formData: FormData): Promise<boolean> => {
       company: formData.company || 'Not specified',
       submitDate: new Date().toISOString(),
 
-      // Add fields specific to contact form
-      ...(formData.type === 'contact' && {
+      // Add fields specific to contact form (includes pain-point-discovery)
+      ...((formData.type === 'contact' || formData.type === 'pain-point-discovery') && {
         message: (formData as ContactFormData).message,
       }),
 
@@ -94,7 +94,8 @@ export const sendContactForm = async (formData: FormData): Promise<boolean> => {
     console.log('Sending email with template params:', templateParams);
 
     // Choose template based on form type
-    const templateId = formData.type === 'contact'
+    // Both 'contact' and 'pain-point-discovery' use the contact template
+    const templateId = (formData.type === 'contact' || formData.type === 'pain-point-discovery')
         ? emailConfig.templates.contact
         : emailConfig.templates.customProject;
 

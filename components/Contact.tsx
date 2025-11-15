@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEvent, MouseEvent, useState, useRef, useEffect } from 'react';
+import { ChangeEvent, useState, useRef, useEffect } from 'react';
 import { sendContactForm } from '@/lib/emailService';
 import { Send, CheckCircle, Calendar } from 'lucide-react';
 import gsap from 'gsap';
@@ -79,7 +79,7 @@ const Contact = () => {
     return Object.keys(errors).length === 0;
   };
 
-  const handleSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
     if (!validateForm()) {
@@ -199,7 +199,7 @@ This is a free consultation request to assess fit and discuss solutions.`;
           </div>
         ) : (
           <div className="chrome-surface chrome-edge rounded-3xl p-8 md:p-12">
-            <div className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name & Email */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
@@ -372,7 +372,6 @@ This is a free consultation request to assess fit and discuss solutions.`;
               {/* Submit */}
               <button
                 type="submit"
-                onClick={handleSubmit}
                 disabled={isSubmitting || !formData.name || !formData.email || !formData.company || !formData.companySize || !formData.painPoint || !formData.timeSpent}
                 className="chrome-button w-full px-8 py-5 text-lg rounded-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
@@ -385,7 +384,7 @@ This is a free consultation request to assess fit and discuss solutions.`;
               <p className="text-center text-sm text-gray-500">
                 🔒 We'll review your information and reach out within 24-48 hours to schedule a consultation.
               </p>
-            </div>
+            </form>
           </div>
         )}
       </div>
